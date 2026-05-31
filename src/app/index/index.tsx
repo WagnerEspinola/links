@@ -3,6 +3,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Image, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 
+import { Category } from "@/components/category";
+
 export default function Index() {
   return (
     <View style={styles.container}>
@@ -13,6 +15,9 @@ export default function Index() {
           <MaterialIcons name="add" size={32} color={colors.green[300]} />
         </TouchableOpacity>
       </View>
+      <Category name="Projetos" icon="code" isSelected />
+      <Category name="Site" icon="language" isSelected={false} />
+      <Category name="Vídeo" icon="movie" isSelected={false} />
     </View>
   );
 }
