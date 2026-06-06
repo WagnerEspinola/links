@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
 
   linksContent: {
     gap: 20,
-    padding: 20,
+    padding: 24,
     paddingBottom: 100,
   },
   modal: {
@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.gray[900],
     borderTopWidth: 1,
     borderTopColor: colors.gray[800],
-    paddingBottom: 32,
+    paddingBottom: 42,
     padding: 24,
   },
 
@@ -54,6 +54,7 @@ export const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
+    marginBottom: 32,
   },
 
   modalCategory: {
@@ -64,12 +65,12 @@ export const styles = StyleSheet.create({
   },
 
   modalLinkName: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "600",
     color: colors.gray[200],
   },
 
-  modalLinkUrl: {
+  modalUrl: {
     fontSize: 14,
     color: colors.gray[400],
   },
