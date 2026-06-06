@@ -1,7 +1,7 @@
+import { styles } from "@/styles/category";
 import { colors } from "@/styles/colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Pressable, PressableProps, Text } from "react-native";
-import { styles } from "./styles";
 
 type Props = PressableProps & {
   name: string;
