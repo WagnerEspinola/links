@@ -1,11 +1,10 @@
 import { Option } from "@/components/option";
-import { } from "@/styles/categories";
 import { colors } from "@/styles/colors";
+import { categories } from "@/utils/categories";
 
 import { Categories } from "@/components/categories";
 import { Link } from "@/components/link";
 import { styles } from "@/styles/index";
-import { categories } from "@/utils/categories";
 import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -29,6 +28,7 @@ export default function Index() {
           <MaterialIcons name="add" size={32} color={colors.green[300]} />
         </TouchableOpacity>
       </View>
+
       <Categories onChange={setCategory} selected={category} />
 
       <FlatList
