@@ -1,11 +1,14 @@
 import { Option } from "@/components/option";
+import { } from "@/styles/categories";
 import { colors } from "@/styles/colors";
 
 import { Categories } from "@/components/categories";
 import { Link } from "@/components/link";
 import { styles } from "@/styles/index";
+import { categories } from "@/utils/categories";
 import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { useState } from "react";
 import {
   FlatList,
   Image,
@@ -16,6 +19,7 @@ import {
 } from "react-native";
 
 export default function Index() {
+  const [category, setCategory] = useState(categories[0].name);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -25,9 +29,10 @@ export default function Index() {
           <MaterialIcons name="add" size={32} color={colors.green[300]} />
         </TouchableOpacity>
       </View>
-      <Categories />
+      <Categories onChange={setCategory} selected={category} />
+
       <FlatList
-        data={["1", "2", "3", "4", "5"]}
+        data={["1", "2", "3"]}
         keyExtractor={(item) => item}
         renderItem={({ item }) => (
           <Link
@@ -45,6 +50,7 @@ export default function Index() {
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalCategory}>Curso</Text>
+
               <TouchableOpacity>
                 <MaterialIcons
                   name="close"
@@ -54,6 +60,7 @@ export default function Index() {
               </TouchableOpacity>
             </View>
             <Text style={styles.modalLinkName}>Rocketseat</Text>
+
             <Text style={styles.modalUrl}>https://www.rocketseat.com.br/</Text>
 
             <View style={styles.modalFooter}>

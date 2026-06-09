@@ -1,12 +1,22 @@
+import { Button } from "@/components/button";
 import { Categories } from "@/components/categories";
 import { Input } from "@/components/input";
 import { styles } from "@/styles/add";
 import { colors } from "@/styles/colors";
 import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
 export default function Add() {
+  const [category, setCategory] = useState("");
+  const [name, setName] = useState("");
+  const [url, setUrl] = useState("");
+
+  function handleAdd() {
+    console.log({ name, url });
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -21,10 +31,12 @@ export default function Add() {
         <Text style={styles.title}>Novo</Text>
       </View>
       <Text style={styles.label}>Selecione uma categoria</Text>
-      <Categories />
+      <Categories onChange={setCategory} selected={category} />
+
       <View style={styles.form}>
-        <Input placeholder="Nome" />
-        <Input placeholder="Url" />
+        <Input placeholder="Nome" onChangeText={setName} autoCorrect={false} />
+        <Input placeholder="Url" onChangeText={setUrl} autoCorrect={false} />
+        <Button title="Adicionar" onPress={handleAdd} />
       </View>
     </View>
   );

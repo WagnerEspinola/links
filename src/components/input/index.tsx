@@ -1,6 +1,6 @@
 import { colors } from "@/styles/colors";
+import { styles } from "@/styles/input";
 import { TextInput, TextInputProps } from "react-native";
-import { styles } from "./styles";
 
 export function Input({ ...rest }: TextInputProps) {
   return (
