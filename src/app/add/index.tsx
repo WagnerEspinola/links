@@ -14,17 +14,19 @@ export default function Add() {
   const [url, setUrl] = useState("");
 
   function handleAdd() {
-    if (!category.trim()) {
-      return Alert.alert("Categoria", "Selecione a categoria");
+    try {
+      if (!category.trim()) {
+        return Alert.alert("Categoria", "Selecione a categoria");
+      }
+      if (!name.trim()) {
+        return Alert.alert("Nome", "Informe o nome");
+      }
+      if (!url.trim()) {
+        return Alert.alert("URL", "Informe a URL");
+      }
+    } catch (error) {
+      console.error(error);
     }
-    if (!name.trim()) {
-      return Alert.alert("Nome", "Informe o nome");
-    }
-    if (!url.trim()) {
-      return Alert.alert("URL", "Informe a URL");
-    }
-
-    console.log({ category, name, url });
   }
 
   return (
@@ -40,12 +42,18 @@ export default function Add() {
 
         <Text style={styles.title}>Novo</Text>
       </View>
+
       <Text style={styles.label}>Selecione uma categoria</Text>
       <Categories onChange={setCategory} selected={category} />
 
       <View style={styles.form}>
         <Input placeholder="Nome" onChangeText={setName} autoCorrect={false} />
-        <Input placeholder="URL" onChangeText={setUrl} autoCorrect={false} />
+        <Input
+          placeholder="URL"
+          onChangeText={setUrl}
+          autoCorrect={false}
+          autoCapitalize="none"
+        />
         <Button title="Adicionar" onPress={handleAdd} />
       </View>
     </View>
