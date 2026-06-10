@@ -32,9 +32,6 @@ export default function Add() {
         url,
         category,
       });
-
-      const data = await linkStorage.get();
-      console.log(data);
     } catch (error) {
       Alert.alert("Ops", "Não foi possível adicionar o link");
       console.log(error);
