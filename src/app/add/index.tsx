@@ -32,6 +32,10 @@ export default function Add() {
         url,
         category,
       });
+
+      Alert.alert("Sucesso", "Link adicionado com sucesso", [
+        { text: "OK", onPress: () => router.back() },
+      ]);
     } catch (error) {
       Alert.alert("Ops", "Não foi possível adicionar o link");
       console.log(error);
