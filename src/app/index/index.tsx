@@ -13,6 +13,7 @@ import {
   Alert,
   FlatList,
   Image,
+  Linking,
   Modal,
   Text,
   TouchableOpacity,
@@ -40,6 +41,34 @@ export default function Index() {
   function handleDetails(selected: LinkStorage) {
     setShowModal(true);
     setLink(selected);
+  }
+
+  async function linkRemove() {
+    try {
+      await linkStorage.remove(link.id);
+      getLinks();
+      setShowModal(false);
+    } catch (error) {
+      Alert.alert("Erro", "Não foi possível excluir");
+      console.log(error);
+    }
+  }
+
+  async function handleRemove() {
+    Alert.alert("Excluir", "Deseja realmente excluir?", [
+      { style: "cancel", text: "Não" },
+      { text: "Sim", onPress: linkRemove },
+    ]);
+  }
+
+  async function handleOpen() {
+    try {
+      await Linking.openURL(link.url);
+      setShowModal(false);
+    } catch (error) {
+      Alert.alert("Erro", "Não foi possível abrir o link");
+      console.log(error);
+    }
   }
 
   useFocusEffect(
@@ -97,8 +126,13 @@ export default function Index() {
             <Text style={styles.modalUrl}>{link.url}</Text>
 
             <View style={styles.modalFooter}>
-              <Option name="Excluir" icon="delete" variant="secondary" />
-              <Option name="Abrir" icon="language" />
+              <Option
+                name="Excluir"
+                icon="delete"
+                variant="secondary"
+                onPress={handleRemove}
+              />
+              <Option name="Abrir" icon="language" onPress={handleOpen} />
             </View>
           </View>
         </View>
