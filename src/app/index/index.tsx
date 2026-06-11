@@ -20,6 +20,8 @@ import {
 } from "react-native";
 
 export default function Index() {
+  const [showModal, setShowModal] = useState(false);
+  const [link, setLink] = useState<LinkStorage>({} as LinkStorage);
   const [links, setLinks] = useState<LinkStorage[]>([]);
   const [category, setCategory] = useState(categories[0].name);
 
@@ -35,6 +37,11 @@ export default function Index() {
     }
   }
 
+  function handleDetails(selected: LinkStorage) {
+    setShowModal(true);
+    setLink(selected);
+  }
+
   useFocusEffect(
     useCallback(() => {
       getLinks();
@@ -46,7 +53,11 @@ export default function Index() {
       <View style={styles.header}>
         <Image source={require("@/assets/logo.png")} style={styles.logo} />
 
-        <TouchableOpacity onPress={() => router.navigate("/add")}>
+        <TouchableOpacity
+          onPress={() =>
+            router.canGoBack() ? router.back() : router.replace("/add")
+          }
+        >
           <MaterialIcons name="add" size={32} color={colors.green[300]} />
         </TouchableOpacity>
       </View>
@@ -60,20 +71,20 @@ export default function Index() {
           <Link
             name={item.name}
             url={item.url}
-            onDetails={() => console.log("Clicou!")}
+            onDetails={() => handleDetails(item)}
           />
         )}
         style={styles.links}
         contentContainerStyle={styles.linksContent}
         showsVerticalScrollIndicator={false}
       />
-      <Modal transparent visible={false}>
+      <Modal transparent visible={showModal} animationType="slide">
         <View style={styles.modal}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
-              <Text style={styles.modalCategory}>Curso</Text>
+              <Text style={styles.modalCategory}>{link.category}</Text>
 
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => setShowModal(false)}>
                 <MaterialIcons
                   name="close"
                   size={20}
@@ -81,9 +92,9 @@ export default function Index() {
                 />
               </TouchableOpacity>
             </View>
-            <Text style={styles.modalLinkName}>Rocketseat</Text>
+            <Text style={styles.modalLinkName}>{link.name}</Text>
 
-            <Text style={styles.modalUrl}>https://www.rocketseat.com.br/</Text>
+            <Text style={styles.modalUrl}>{link.url}</Text>
 
             <View style={styles.modalFooter}>
               <Option name="Excluir" icon="delete" variant="secondary" />
